@@ -23,6 +23,8 @@ h1 {
     font-size: 50px;
 }
 
+/* Centers start button on page. Also makes it stand out from header */
+
 button {
     font-size: 35px;
     background-color: green;
