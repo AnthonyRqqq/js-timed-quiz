@@ -38,67 +38,24 @@ function startGame() {
     var answerList = document.createElement("ul");
     questionOne.appendChild(answerList);
 
-    //Creates answers and adds to list
-    var answerA = document.createElement("li");
-    answerList.appendChild(answerA);
-    answerABox = document.createElement("input");
-    answerABox.setAttribute("type", "checkbox");
-    answerABox.setAttribute("id", "answer-A")
-    answerAText = document.createElement("label");
-    answerAText.textContent = "Answer A";
-    answerA.appendChild(answerABox);
-    answerA.appendChild(answerAText);
+    var answerOne = document.createElement("button");
+    answerList.appendChild(answerOne);
+    answerOne.textContent = "This is the first answer";
 
-    var answerB = document.createElement("li");
-    answerList.appendChild(answerB);
-    answerBBox = document.createElement("input");
-    answerBBox.setAttribute("type", "checkbox");
-    answerBBox.setAttribute("id", "answer-B")
-    answerBText = document.createElement("label");
-    answerBText.textContent = "Answer B";
-    answerB.appendChild(answerBBox);
-    answerB.appendChild(answerBText);
+    var answerTwo = document.createElement("button");
+    answerList.appendChild(answerTwo);
+    answerTwo.textContent = "This is the second answer";
 
-    var answerC = document.createElement("li");
-    answerList.appendChild(answerC);
-    answerCBox = document.createElement("input");
-    answerCBox.setAttribute("type", "checkbox");
-    answerCBox.setAttribute("id", "answer-C")
-    answerCText = document.createElement("label");
-    answerCText.textContent = "Answer C";
-    answerC.appendChild(answerCBox);
-    answerC.appendChild(answerCText);
+    var answerThree = document.createElement("button");
+    answerList.appendChild(answerThree);
+    answerThree.textContent = "This is the third answer";
 
-    var answerD = document.createElement("li");
-    answerList.appendChild(answerD);
-    answerDBox = document.createElement("input");
-    answerDBox.setAttribute("type", "checkbox");
-    answerDBox.setAttribute("id", "answer-D");
-    answerDText = document.createElement("label");
-    answerDText.textContent = "Answer D";
-    answerD.appendChild(answerDBox);
-    answerD.appendChild(answerDText);
-
-    // Create submit button
-    var submitButton = document.createElement("button");
-    submitButton.textContent = "Submit";
-    submitButton.setAttribute("style", "font-size: 30px; background-color: #3a445d; color: white; padding: 5px");
-    questionOne.appendChild(submitButton);
-
-
-
-    // // Assigns variable to each possible answer
-    // var answerA = document.querySelector("#answer-one");
-    // var answerB = document.querySelector("#answer-two");
-    // var answerC = document.querySelector("#answer-three");
-    // var answerD = document.querySelector("#answer-four");
-
-    // // Checks whether correct answer is selected or not
-    // if (answerC && answerC.type === "checkbox" && answerC.checked) {
-    //     currentScore + 25;
-    //     console.log("Yes");
-    // }
-    // else {
-
-    // }
+    var answerFour = document.createElement("button");
+    answerList.appendChild(answerFour);
+    answerFour.textContent = "This is the fourth answer";
+    
+    answerOne.addEventListener("click", console.log("Correct"));
+    answerTwo.addEventListener("click", console.log("Incorrect"));
+    answerThree.addEventListener("click", console.log("Incorrect"));
+    answerFour.addEventListener("click", console.log("Incorrect"));
 }

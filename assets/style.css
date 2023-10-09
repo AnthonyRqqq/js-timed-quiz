@@ -76,8 +76,7 @@ ul {
     font-size: 35px;
 }
 
-#question input[type=checkbox] {
-    width:15px;
-    height: 15px;
+#question button {
+    min-width: 50%;
 }
 
