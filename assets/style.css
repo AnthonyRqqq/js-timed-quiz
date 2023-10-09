@@ -25,7 +25,7 @@ h1 {
 
 /* Centers start button on page. Also makes it stand out from header */
 
-button {
+header button {
     font-size: 35px;
     background-color: green;
     padding: 15px 65px;
@@ -38,24 +38,8 @@ button {
     font-size: 35px
 }
 
-/* #high-scores  {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    padding-top: 13%;
-}
-
-h2 {
-    font-size: 35px;
-}
-
-ul {
-    list-style-type: none;
-    font-size: 35px;
-} */
-
-/* CSS coding for questions */
-#question  {
+/* Styling for high scores */
+#high-scores  {
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -71,7 +55,29 @@ ul {
     font-size: 35px;
 }
 
-input[type=checkbox] {
+/* Styling for questions */
+#question * {
+    padding: 10px;
+}
+
+#question {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 10%;
+}
+
+#question h2 {
+    font-size: 35px;
+}
+
+#question ul {
+    list-style-type: none;
+    font-size: 35px;
+}
+
+#question input[type=checkbox] {
     width:15px;
     height: 15px;
 }
+
