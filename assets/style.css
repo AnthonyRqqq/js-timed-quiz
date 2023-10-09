@@ -37,3 +37,41 @@ button {
 #timer {
     font-size: 35px
 }
+
+/* #high-scores  {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 13%;
+}
+
+h2 {
+    font-size: 35px;
+}
+
+ul {
+    list-style-type: none;
+    font-size: 35px;
+} */
+
+/* CSS coding for questions */
+#question  {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 13%;
+}
+
+h2 {
+    font-size: 35px;
+}
+
+ul {
+    list-style-type: none;
+    font-size: 35px;
+}
+
+input[type=checkbox] {
+    width:15px;
+    height: 15px;
+}
