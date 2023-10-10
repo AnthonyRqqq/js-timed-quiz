@@ -4,6 +4,21 @@ var highScores = document.querySelector("#high-scores")
 startButton.addEventListener("click", startGame);
 
 
+// Start timer countdown
+var timer = document.querySelector("#timer");
+var secondsLeft = 60;
+function countdown() {
+    var timerInterval = setInterval(function() {
+        secondsLeft--;
+        timer.textContent = secondsLeft;
+
+        if (secondsLeft === 0) {
+            clearInterval(timerInterval);
+        }
+    }, 1000);
+}
+countdown();
+
 // Start button function
 function startGame() {
 
@@ -54,8 +69,17 @@ function startGame() {
     answerList.appendChild(answerFour);
     answerFour.textContent = "This is the fourth answer";
     
-    answerOne.addEventListener("click", console.log("Correct"));
-    answerTwo.addEventListener("click", console.log("Incorrect"));
-    answerThree.addEventListener("click", console.log("Incorrect"));
-    answerFour.addEventListener("click", console.log("Incorrect"));
+    // Adds to score when correct answer is selected. Subtracts from time otherwise
+    answerOne.addEventListener("click", function() {
+        currentScore.textContent = parseInt(currentScore.textContent) + 25;
+    });
+    answerTwo.addEventListener("click", function() {
+        console.log("Incorrect");
+    });   
+    answerThree.addEventListener("click", function() {
+        console.log("Incorrect");
+    });    
+    answerFour.addEventListener("click", function() {
+        console.log("Incorrect");
+    });
 }
