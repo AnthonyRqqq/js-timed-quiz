@@ -3,7 +3,6 @@ var startButton = document.querySelector("#start-button");
 var highScores = document.querySelector("#high-scores")
 startButton.addEventListener("click", startGame);
 
-
 // Creates function for timer countdown
 var timer = document.querySelector("#timer");
 var secondsLeft = 60;
@@ -40,14 +39,38 @@ countdown();
     titleElement.insertBefore(scoreBox, timer);
     scoreBox.setAttribute("style", "font-size: 35px; padding: 15px 65px; position: relative; right: 10%;" );
 
+    // Creates function for incorrect answer choice
+    function incorrectAnswer() {
+        secondsLeft -= 10;
+        timer.textContent = secondsLeft;
+        if (secondsLeft <= 0) {
+            question.remove();
+            return;
+        } else {
+            question.remove();
+        }
+    }
+
+    // Creates function for correct answer choice
+    function correctAnswer() {
+        currentScore.textContent = parseInt(currentScore.textContent) + 25;
+        if (secondsLeft <= 0) {
+            question.remove();
+            return;
+        } else {
+            question.remove();
+        }
+    }
+    
     firstQuestion();
-    // Creates question 
+    // Creates first question and begins chain of questions 
+    // Correct answer is #3
     function firstQuestion() {
         var body = document.querySelector("body");
         var question = document.createElement("section");
         question.setAttribute("id", "question");
         var questionBox = document.createElement("h2");
-        var questionText = document.createTextNode("Blah blah blah");
+        var questionText = document.createTextNode("The condition of an if/else statement is enclosed within ___.");
         body.appendChild(question);
         question.appendChild(questionBox);
         questionBox.appendChild(questionText);
@@ -58,72 +81,46 @@ countdown();
 
         var answerOne = document.createElement("button");
         answerList.appendChild(answerOne);
-        answerOne.textContent = "This is the first answer";
+        answerOne.textContent = "1: quotes";
 
         var answerTwo = document.createElement("button");
         answerList.appendChild(answerTwo);
-        answerTwo.textContent = "This is the second answer";
+        answerTwo.textContent = "2: curly brackets";
 
         var answerThree = document.createElement("button");
         answerList.appendChild(answerThree);
-        answerThree.textContent = "This is the third answer";
+        answerThree.textContent = "3: parenthesis";
 
         var answerFour = document.createElement("button");
         answerList.appendChild(answerFour);
-        answerFour.textContent = "This is the fourth answer";
+        answerFour.textContent = "4: square brackets";
         
         // Adds to score when correct answer is selected. Subtracts from time otherwise
         answerOne.addEventListener("click", function() {
-            currentScore.textContent = parseInt(currentScore.textContent) + 25;
-            if (secondsLeft <= 0) {
-                question.remove();
-                return;
-            } else {
-                question.remove();
-            }
+            incorrectAnswer();
             secondQuestion();
         });
         answerTwo.addEventListener("click", function() {
-            secondsLeft -= 10;
-            timer.textContent = secondsLeft;
-            if (secondsLeft <= 0) {
-                question.remove();
-                return;
-            } else {
-                question.remove();
-            }
+            incorrectAnswer();
             secondQuestion();
         });   
         answerThree.addEventListener("click", function() {
-            secondsLeft -= 10;
-            timer.textContent = secondsLeft;
-            if (secondsLeft <= 0) {
-                question.remove();
-                return;
-            } else {
-                question.remove();
-            }
+            correctAnswer();
             secondQuestion();
         });    
         answerFour.addEventListener("click", function() {
-            secondsLeft -= 10;
-            timer.textContent = secondsLeft;
-            if (secondsLeft <= 0) {
-                question.remove();
-                return;
-            } else {
-                question.remove();
-            }
+            incorrectAnswer();
             secondQuestion();
-            });
+        });
     } 
 
+    // Correct answer is #2
     function secondQuestion() {
         var body = document.querySelector("body");
         var question = document.createElement("section");
         question.setAttribute("id", "question");
         var questionBox = document.createElement("h2");
-        var questionText = document.createTextNode("Blah blah blah");
+        var questionText = document.createTextNode("String values must be enclosed within ___ when being assigned to variables.");
         body.appendChild(question);
         question.appendChild(questionBox);
         questionBox.appendChild(questionText);
@@ -134,72 +131,46 @@ countdown();
 
         var answerOne = document.createElement("button");
         answerList.appendChild(answerOne);
-        answerOne.textContent = "This is the first answer of the second question";
+        answerOne.textContent = "1: parenthesis";
 
         var answerTwo = document.createElement("button");
         answerList.appendChild(answerTwo);
-        answerTwo.textContent = "This is the second answer";
+        answerTwo.textContent = "2: quotes";
 
         var answerThree = document.createElement("button");
         answerList.appendChild(answerThree);
-        answerThree.textContent = "This is the third answer";
+        answerThree.textContent = "3: commas";
 
         var answerFour = document.createElement("button");
         answerList.appendChild(answerFour);
-        answerFour.textContent = "This is the fourth answer";
+        answerFour.textContent = "4: curly brackets";
         
         // Adds to score when correct answer is selected. Subtracts from time otherwise
         answerOne.addEventListener("click", function() {
-            currentScore.textContent = parseInt(currentScore.textContent) + 25;
-            if (secondsLeft <= 0) {
-                question.remove();
-                return;
-            } else {
-                question.remove();
-            }
+            incorrectAnswer();
             thirdQuestion();
         });
         answerTwo.addEventListener("click", function() {
-            secondsLeft -= 10;
-            timer.textContent = secondsLeft;
-            if (secondsLeft <= 0) {
-                question.remove();
-                return;
-            } else {
-                question.remove();
-            }
+            correctAnswer();
             thirdQuestion();
         });   
         answerThree.addEventListener("click", function() {
-            secondsLeft -= 10;
-            timer.textContent = secondsLeft;
-            if (secondsLeft <= 0) {
-                question.remove();
-                return;
-            } else {
-                question.remove();
-            }
+            incorrectAnswer();
             thirdQuestion();
         });    
         answerFour.addEventListener("click", function() {
-            secondsLeft -= 10;
-            timer.textContent = secondsLeft;
-            if (secondsLeft <= 0) {
-                question.remove();
-                return;
-            } else {
-                question.remove();
-            }
+            incorrectAnswer();
             thirdQuestion();
-            });
+        });
     } 
 
+    // Correct answer is #1
     function thirdQuestion() {
         var body = document.querySelector("body");
         var question = document.createElement("section");
         question.setAttribute("id", "question");
         var questionBox = document.createElement("h2");
-        var questionText = document.createTextNode("Blah blah blah");
+        var questionText = document.createTextNode("Which is not a commonly used data type?");
         body.appendChild(question);
         question.appendChild(questionBox);
         questionBox.appendChild(questionText);
@@ -210,72 +181,46 @@ countdown();
 
         var answerOne = document.createElement("button");
         answerList.appendChild(answerOne);
-        answerOne.textContent = "This is the first answer of the third question";
+        answerOne.textContent = "1: Alerts";
 
         var answerTwo = document.createElement("button");
         answerList.appendChild(answerTwo);
-        answerTwo.textContent = "This is the second answer";
+        answerTwo.textContent = "2: Strings";
 
         var answerThree = document.createElement("button");
         answerList.appendChild(answerThree);
-        answerThree.textContent = "This is the third answer";
+        answerThree.textContent = "3: Booleans";
 
         var answerFour = document.createElement("button");
         answerList.appendChild(answerFour);
-        answerFour.textContent = "This is the fourth answer";
+        answerFour.textContent = "4: Numbers";
         
         // Adds to score when correct answer is selected. Subtracts from time otherwise
         answerOne.addEventListener("click", function() {
-            currentScore.textContent = parseInt(currentScore.textContent) + 25;
-            if (secondsLeft <= 0) {
-                question.remove();
-                return;
-            } else {
-                question.remove();
-            }
+            correctAnswer();
             fourthQuestion();
         });
         answerTwo.addEventListener("click", function() {
-            secondsLeft -= 10;
-            timer.textContent = secondsLeft;
-            if (secondsLeft <= 0) {
-                question.remove();
-                return;
-            } else {
-                question.remove();
-            }
+            incorrectAnswer();
             fourthQuestion();
         });   
         answerThree.addEventListener("click", function() {
-            secondsLeft -= 10;
-            timer.textContent = secondsLeft;
-            if (secondsLeft <= 0) {
-                question.remove();
-                return;
-            } else {
-                question.remove();
-            }
+            incorrectAnswer();
             fourthQuestion();
         });    
         answerFour.addEventListener("click", function() {
-            secondsLeft -= 10;
-            timer.textContent = secondsLeft;
-            if (secondsLeft <= 0) {
-                question.remove();
-                return;
-            } else {
-                question.remove();
-            }
+            incorrectAnswer();
             fourthQuestion();
-            });
+        });
     } 
 
+    // Answer is #4
     function fourthQuestion() {
         var body = document.querySelector("body");
         var question = document.createElement("section");
         question.setAttribute("id", "question");
         var questionBox = document.createElement("h2");
-        var questionText = document.createTextNode("Blah blah blah");
+        var questionText = document.createTextNode("Arrays in JavaScript can store ___.");
         body.appendChild(question);
         question.appendChild(questionBox);
         questionBox.appendChild(questionText);
@@ -286,59 +231,32 @@ countdown();
 
         var answerOne = document.createElement("button");
         answerList.appendChild(answerOne);
-        answerOne.textContent = "This is the first answer of the fourth question";
+        answerOne.textContent = "1: other arrays";
 
         var answerTwo = document.createElement("button");
         answerList.appendChild(answerTwo);
-        answerTwo.textContent = "This is the second answer";
+        answerTwo.textContent = "2: booleans";
 
         var answerThree = document.createElement("button");
         answerList.appendChild(answerThree);
-        answerThree.textContent = "This is the third answer";
+        answerThree.textContent = "3: numbers and strings";
 
         var answerFour = document.createElement("button");
         answerList.appendChild(answerFour);
-        answerFour.textContent = "This is the fourth answer";
+        answerFour.textContent = "4: All of the above";
         
         // Adds to score when correct answer is selected. Subtracts from time otherwise
         answerOne.addEventListener("click", function() {
-            currentScore.textContent = parseInt(currentScore.textContent) + 25;
-            if (secondsLeft <= 0) {
-                question.remove();
-                return;
-            } else {
-                question.remove();
-            }
+            correctAnswer();
         });
         answerTwo.addEventListener("click", function() {
-            secondsLeft -= 10;
-            timer.textContent = secondsLeft;
-            if (secondsLeft <= 0) {
-                question.remove();
-                return;
-            } else {
-                question.remove();
-            }
+            incorrectAnswer();
         });   
         answerThree.addEventListener("click", function() {
-            secondsLeft -= 10;
-            timer.textContent = secondsLeft;
-            if (secondsLeft <= 0) {
-                question.remove();
-                return;
-            } else {
-                question.remove();
-            }
+            incorrectAnswer();
         });    
         answerFour.addEventListener("click", function() {
-            secondsLeft -= 10;
-            timer.textContent = secondsLeft;
-            if (secondsLeft <= 0) {
-                question.remove();
-                return;
-            } else {
-                question.remove();
-            }
-            });
+            incorrectAnswer();
+        });
     } 
 }

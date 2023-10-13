@@ -34,6 +34,10 @@ header button {
     box-shadow: 5px 5px; color: black;
 }
 
+header button:hover {
+    background-color: rgb(33, 201, 33);
+}
+
 #timer {
     font-size: 35px
 }
@@ -77,6 +81,13 @@ ul {
 }
 
 #question button {
-    min-width: 50%;
+    min-width: 40%;
+    background-color: #3a445d;
+    color: white;
+    margin: 5%;
+    font-size: 30px;
 }
 
+#question button:hover {
+    background-color: #7b7d83;
+}
