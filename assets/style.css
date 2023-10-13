@@ -42,14 +42,22 @@ header button:hover {
     font-size: 35px
 }
 
-/* Styling for high scores */
-#high-scores  {
+/* Styling for high scores and instructions */
+#high-scores,
+#instructions  {
     display: flex;
     align-items: center;
     flex-direction: column;
-    padding-top: 13%;
+    padding-top: 5%;
 }
 
+#instructions {
+    padding-top: 5%;
+}
+
+#instructions p {
+    font-size: 25px;
+}
 h2 {
     font-size: 35px;
 }

@@ -1,6 +1,7 @@
 // Add function to clicking "Start" button
 var startButton = document.querySelector("#start-button");
 var highScores = document.querySelector("#high-scores")
+var instructions = document.querySelector("#instructions")
 startButton.addEventListener("click", startGame);
 
 // Creates function for timer countdown
@@ -14,6 +15,7 @@ function countdown() {
         if(secondsLeft <= 0 ) {
             timer.textContent = "Time's Up!";
             secondsLeft = 0;
+            question.remove();
         }
     }, 1000);
 }
@@ -25,6 +27,7 @@ countdown();
     // Removes button for game start and high scores
     startButton.remove();
     highScores.remove();
+    instructions.remove();
 
     // Creates scorekeeping variables
     var scoreBox = document.createElement("p");
@@ -170,7 +173,7 @@ countdown();
         var question = document.createElement("section");
         question.setAttribute("id", "question");
         var questionBox = document.createElement("h2");
-        var questionText = document.createTextNode("Which is not a commonly used data type?");
+        var questionText = document.createTextNode("Which is NOT a commonly used data type?");
         body.appendChild(question);
         question.appendChild(questionBox);
         questionBox.appendChild(questionText);
