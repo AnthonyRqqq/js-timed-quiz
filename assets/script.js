@@ -1,6 +1,7 @@
 // Add function to clicking "Start" button
+var header = document.querySelector("header")
 var startButton = document.querySelector("#start-button");
-var highScores = document.querySelector("#high-scores")
+var highScoreDisplay = document.querySelector("#high-scores")
 var instructions = document.querySelector("#instructions")
 startButton.addEventListener("click", startGame);
 
@@ -12,13 +13,41 @@ function countdown() {
         secondsLeft--;
         timer.textContent = secondsLeft;
 
-        if(secondsLeft <= 0 ) {
+        if(secondsLeft <= 0) {
             timer.textContent = "Time's Up!";
             secondsLeft = 0;
-            question.remove();
         }
     }, 1000);
 }
+
+var highScores = {
+    one: [1, "qwe"],
+    two: [5, "ytu"],
+    three: [10, "arr"],
+}
+// Convert the object into an array of key-value pairs
+var entries = Object.entries(highScores);
+// Sort the array based on the values
+var sortedEntries = entries.sort((a, b) => b[1][0] - a[1][0]);
+// Create a new object from the sorted array
+var sortedHighScores = {};
+sortedEntries.forEach((entry, index) => {
+    var newKey = `highscore${index + 1}`;
+    sortedHighScores[newKey] = entry[1];
+  });
+//Code for 3 above lines from XpertLearningAssistant
+
+// Displays recorded high scores
+var highScoreOne = document.getElementById("high-score-one");
+var highScoreTwo = document.getElementById("high-score-two");
+var highScoreThree = document.getElementById("high-score-three");
+
+highScoreOne.textContent = Object.values(sortedHighScores)[0];
+highScoreTwo.textContent = Object.values(sortedHighScores)[1];
+highScoreThree.textContent = Object.values(sortedHighScores)[2];
+
+
+
 
 // Start button function
 function startGame() {
@@ -26,13 +55,13 @@ countdown();
 
     // Removes button for game start and high scores
     startButton.remove();
-    highScores.remove();
+    highScoreDisplay.remove();
     instructions.remove();
 
     // Creates scorekeeping variables
     var scoreBox = document.createElement("p");
     var scoreTitle = document.createTextNode("Current Score: ");
-    var currentScore = document.createTextNode(0)
+    var currentScore = document.createTextNode(0);
     scoreBox.appendChild(scoreTitle);
     scoreBox.appendChild(currentScore);
 
@@ -48,6 +77,7 @@ countdown();
         timer.textContent = secondsLeft;
         if (secondsLeft <= 0) {
             question.remove();
+            gameOver();
             return;
         } else {
             question.remove();
@@ -56,19 +86,26 @@ countdown();
 
     // Creates function for correct answer choice
     function correctAnswer() {
+        //Updates score text and saves it to local storage
         currentScore.textContent = parseInt(currentScore.textContent) + 25;
+        localStorage.setItem("final-score", currentScore.textContent);
         if (secondsLeft <= 0) {
             question.remove();
+            gameOver();
             return;
         } else {
             question.remove();
         }
     }
     
+    // Resets saved score and begins chain of questions
+    resetScore();
     firstQuestion();
-    // Creates first question and begins chain of questions 
+    
+    // Creates first question and resets score
     // Correct answer is #3
     function firstQuestion() {
+        localStorage.setItem("final-score", currentScore.textContent);
         var body = document.querySelector("body");
         var question = document.createElement("section");
         question.setAttribute("id", "question");
@@ -250,16 +287,53 @@ countdown();
         
         // Adds to score when correct answer is selected. Subtracts from time otherwise
         answerOne.addEventListener("click", function() {
-            correctAnswer();
+            incorrectAnswer();
+            secondsLeft = 0;
+            gameOver();
         });
         answerTwo.addEventListener("click", function() {
             incorrectAnswer();
+            secondsLeft = 0;
+            gameOver();
         });   
         answerThree.addEventListener("click", function() {
             incorrectAnswer();
+            secondsLeft = 0;
+            gameOver();
         });    
         answerFour.addEventListener("click", function() {
-            incorrectAnswer();
+            correctAnswer();
+            secondsLeft = 0;
+            gameOver();
         });
     } 
 }
+
+//Runs at end of quiz
+function gameOver() {
+    recordScore();
+    location.reload();
+}
+
+// Records most recent score
+function recordScore() {
+    var finalScore = localStorage.getItem("final-score");
+    if (parseInt(finalScore) === 0) {
+        alert("Your final score was 0. Please try again.")
+        return;
+    } else {
+        var saveScore = prompt("Congratulations! Your score was " + finalScore + "! Please enter your intials to save your score.");
+        if (saveScore.length > 3) {
+            alert("Please enter no more than three letters for your initials.");
+            recordScore();
+        }
+    }
+}
+
+function resetScore () {
+    var previousScore = localStorage.getItem("final-score");
+    if (parseInt(previousScore) !== 0) {
+        localStorage.setItem("final-score", 0);
+    }
+}
+
