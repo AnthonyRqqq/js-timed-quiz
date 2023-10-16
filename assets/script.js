@@ -25,6 +25,8 @@ var highScores = {
     two: [0, ""],
     three: [0, ""],
 }
+
+//Code assisted from XpertLearningAssistant
 localStorage.setItem("high-scores", JSON.stringify(highScores));
 var sortedHighScores = JSON.parse(localStorage.getItem("high-scores"));
 var lastScore = JSON.parse(localStorage.getItem("new-score"));
@@ -44,7 +46,6 @@ sortedEntries.forEach((entry, index) => {
   highScores = newHighScores;
   localStorage.setItem("high-scores", JSON.stringify(highScores));
 
-//Code for above lines from XpertLearningAssistant
 
 // Displays recorded high scores
 var highScoreOne = document.getElementById("high-score-one");
@@ -343,12 +344,12 @@ function recordScore() {
     localStorage.setItem("new-score", JSON.stringify(newScore));
 
 
-    
+    // Code assisted by Xpert Learning Assistant
     if (Object.keys(highScores).length > 3) {
         var keys = Object.keys(highScores);
         var lowestScore = keys.reduce((a, b) => (highScores[a][0] < highScores[b][0] ? a : b));
         delete highScores[lowestScore];
-    } // Asistance for code from above block
+    } 
 }
 
 function resetScore () {
