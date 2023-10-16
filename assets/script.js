@@ -21,33 +21,39 @@ function countdown() {
 }
 
 var highScores = {
-    one: [1, "qwe"],
-    two: [5, "ytu"],
-    three: [10, "arr"],
+    one: [0, ""],
+    two: [0, ""],
+    three: [0, ""],
+}
+localStorage.setItem("high-scores", JSON.stringify(highScores));
+var sortedHighScores = JSON.parse(localStorage.getItem("high-scores"));
+var lastScore = JSON.parse(localStorage.getItem("new-score"));
+if (sortedHighScores && lastScore) {
+    sortedHighScores.highscore4 = lastScore;
 }
 // Convert the object into an array of key-value pairs
-var entries = Object.entries(highScores);
+var entries = Object.entries(sortedHighScores);
 // Sort the array based on the values
 var sortedEntries = entries.sort((a, b) => b[1][0] - a[1][0]);
 // Create a new object from the sorted array
-var sortedHighScores = {};
+var newHighScores = {};
 sortedEntries.forEach((entry, index) => {
     var newKey = `highscore${index + 1}`;
-    sortedHighScores[newKey] = entry[1];
+    newHighScores[newKey] = entry[1];
   });
-//Code for 3 above lines from XpertLearningAssistant
+  highScores = newHighScores;
+  localStorage.setItem("high-scores", JSON.stringify(highScores));
+
+//Code for above lines from XpertLearningAssistant
 
 // Displays recorded high scores
 var highScoreOne = document.getElementById("high-score-one");
 var highScoreTwo = document.getElementById("high-score-two");
 var highScoreThree = document.getElementById("high-score-three");
 
-highScoreOne.textContent = Object.values(sortedHighScores)[0];
-highScoreTwo.textContent = Object.values(sortedHighScores)[1];
-highScoreThree.textContent = Object.values(sortedHighScores)[2];
-
-
-
+highScoreOne.textContent = Object.values(highScores)[0];
+highScoreTwo.textContent = Object.values(highScores)[1];
+highScoreThree.textContent = Object.values(highScores)[2];
 
 // Start button function
 function startGame() {
@@ -315,9 +321,10 @@ function gameOver() {
     location.reload();
 }
 
-// Records most recent score
+//  Records most recent score
 function recordScore() {
     var finalScore = localStorage.getItem("final-score");
+    parseInt(finalScore);
     if (parseInt(finalScore) === 0) {
         alert("Your final score was 0. Please try again.")
         return;
@@ -328,6 +335,20 @@ function recordScore() {
             recordScore();
         }
     }
+
+    // Saves most recent score to local storage
+    localStorage.setItem("initials", saveScore);
+    initials = localStorage.getItem("initials");
+    newScore = [parseInt(finalScore), initials];
+    localStorage.setItem("new-score", JSON.stringify(newScore));
+
+
+    
+    if (Object.keys(highScores).length > 3) {
+        var keys = Object.keys(highScores);
+        var lowestScore = keys.reduce((a, b) => (highScores[a][0] < highScores[b][0] ? a : b));
+        delete highScores[lowestScore];
+    } // Asistance for code from above block
 }
 
 function resetScore () {
