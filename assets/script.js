@@ -5,6 +5,10 @@ var highScoreDisplay = document.querySelector("#high-scores")
 var instructions = document.querySelector("#instructions")
 startButton.addEventListener("click", startGame);
 
+// Adds functionality to clicking "Clear High Scores" button
+clearButton = document.getElementById("clear-scores");
+clearButton.addEventListener("click", clearHighScores);
+
 // Creates function for timer countdown
 var timer = document.querySelector("#timer");
 var secondsLeft = 60;
@@ -21,31 +25,38 @@ function countdown() {
 }
 
 var highScores = {
-    one: [0, ""],
-    two: [0, ""],
-    three: [0, ""],
+    one: [],
+    two: [],
+    three: [],
 }
 
-//Code assisted from XpertLearningAssistant
-localStorage.setItem("high-scores", JSON.stringify(highScores));
-var sortedHighScores = JSON.parse(localStorage.getItem("high-scores"));
+// Finds the most recent score as well as if a preexisting list of high scores exists
+if (JSON.parse(localStorage.getItem("new-score")) !== 0)
 var lastScore = JSON.parse(localStorage.getItem("new-score"));
-if (sortedHighScores && lastScore) {
-    sortedHighScores.highscore4 = lastScore;
+if (JSON.parse(localStorage.getItem("high-scores"))) {
+    highScores = JSON.parse(localStorage.getItem("high-scores"))
 }
+
+//Adds most recent score to high scores list
+if (lastScore) {
+highScores.four = lastScore;
+};
+
+// //Code assisted from XpertLearningAssistant
 // Convert the object into an array of key-value pairs
-var entries = Object.entries(sortedHighScores);
+var entries = Object.entries(highScores);
 // Sort the array based on the values
 var sortedEntries = entries.sort((a, b) => b[1][0] - a[1][0]);
-// Create a new object from the sorted array
 var newHighScores = {};
 sortedEntries.forEach((entry, index) => {
     var newKey = `highscore${index + 1}`;
     newHighScores[newKey] = entry[1];
-  });
-  highScores = newHighScores;
-  localStorage.setItem("high-scores", JSON.stringify(highScores));
+});
 
+// Sets and saves updated High Scores list
+highScores = newHighScores;
+delete highScores.highscore4;
+localStorage.setItem("high-scores", JSON.stringify(highScores));
 
 // Displays recorded high scores
 var highScoreOne = document.getElementById("high-score-one");
@@ -325,8 +336,8 @@ function gameOver() {
 //  Records most recent score
 function recordScore() {
     var finalScore = localStorage.getItem("final-score");
-    parseInt(finalScore);
-    if (parseInt(finalScore) === 0) {
+    finalScore = parseInt(finalScore);
+    if (finalScore === 0) {
         alert("Your final score was 0. Please try again.")
         return;
     } else {
@@ -342,16 +353,10 @@ function recordScore() {
     initials = localStorage.getItem("initials");
     newScore = [parseInt(finalScore), initials];
     localStorage.setItem("new-score", JSON.stringify(newScore));
-
-
-    // Code assisted by Xpert Learning Assistant
-    if (Object.keys(highScores).length > 3) {
-        var keys = Object.keys(highScores);
-        var lowestScore = keys.reduce((a, b) => (highScores[a][0] < highScores[b][0] ? a : b));
-        delete highScores[lowestScore];
-    } 
 }
 
+
+// Resets score for new quiz
 function resetScore () {
     var previousScore = localStorage.getItem("final-score");
     if (parseInt(previousScore) !== 0) {
@@ -359,3 +364,13 @@ function resetScore () {
     }
 }
 
+// Clears high score list
+function clearHighScores() {
+    var clearedScores = {};
+    highScores = clearedScores;
+    localStorage.setItem("high-scores", JSON.stringify(highScores));
+    localStorage.setItem("new-score", JSON.stringify(0));
+    highScoreOne.textContent = Object.values(highScores)[0];
+    highScoreTwo.textContent = Object.values(highScores)[1];
+    highScoreThree.textContent = Object.values(highScores)[2];
+}

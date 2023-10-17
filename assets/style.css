@@ -67,6 +67,19 @@ ul {
     font-size: 35px;
 }
 
+/* Styling for Clear button */
+#clear-scores {
+    min-width: 30%;
+    background-color: #3a445d;
+    color: white;
+    margin: 5%;
+    font-size: 30px;
+}
+
+#clear-scores:hover {
+    background-color: #7b7d83;
+}
+
 /* Styling for questions */
 #question * {
     padding: 10px;

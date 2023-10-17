@@ -11,5 +11,4 @@ This quiz was designed to test basic knowledge of JavaScript.
 [A link to the website can be found here.](https://anthonyrqqq.github.io/js-timed-quiz)
 
 ### Sources
-- Code for lines 30-47 assisted by Xpert Learning Assistant
-- Code for line 348-351 assisted by Xpert Learning Assistant
+- Code for lines 36-43 assisted by Xpert Learning Assistant
